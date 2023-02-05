@@ -47,21 +47,25 @@ class NEODatabase:
         self._approaches = approaches
 
         # TODO: What additional auxiliary data structures will be useful?
-        # Map NEO designations
+        # For each neo in neos, build a dictionary mapping the designation to its neo object
         self._designation_neo_dict = {}
-        # Map NEO names
+        # Similarly for name
         self._name_neo_dict = {}
+        
         for neo in self._neos:
             self._designation_neo_dict[neo.designation] = neo
-            # Not every NEO got a name.
             if neo.name:
                 self._name_neo_dict[neo.name] = neo
+            else:
+                continue
+
+        # TODO: Link together the NEOs and their close approaches.
         for approach in self._approaches:
             neo = self._designation_neo_dict[approach._designation]
+            # Link neo to approach using designation
             approach.neo = neo
+            # Link the approach to neo
             neo.approaches.append(approach)
-            
-        # TODO: Link together the NEOs and their close approaches.
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
@@ -98,7 +102,7 @@ class NEODatabase:
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
-
+ 
         This generates a stream of `CloseApproach` objects that match all of the
         provided filters.
 
