@@ -18,6 +18,23 @@ quirks of the data set, such as missing names and unknown diameters.
 You'll edit this file in Task 1.
 """
 
+"""
+Reference:
+des - primary designation of the asteroid or comet (e.g., 443, 2000 SG344)
+orbit_id - orbit ID
+jd - time of close-approach (JD Ephemeris Time)
+cd - time of close-approach (formatted calendar date/time, in UTC)
+dist - nominal approach distance (au)
+dist_min - minimum (3-sigma) approach distance (au)
+dist_max - maximum (3-sigma) approach distance (au)
+v_rel - velocity relative to the approach body at close approach (km/s)
+v_inf - velocity relative to a massless body (km/s)
+t_sigma_f - 3-sigma uncertainty in the time of close-approach (formatted in days, hours, and minutes; days are not included if zero; example "13:02" is 13 hours 2 minutes; example "2_09:08" is 2 days 9 hours 8 minutes)
+h - absolute magnitude H (mag)
+
+""" 
+
+
 
 
 class NearEarthObject:
@@ -68,13 +85,10 @@ class NearEarthObject:
         # TODO: Use this object's attributes to return a human-readable string representation.
         # The project instructions include one possibility. Peek at the __repr__
         # method for examples of advanced string formatting.
-
-       
         if self.hazardous:
             hazardous_text = 'is'
         else:
             hazardous_text = 'is not'
-            
         return f"A NearEarthObject {self.fullname} has a diameter of {self.diameter:.3f} km and {hazardous_text} potentially hazardous."
 
     def __repr__(self):
@@ -145,6 +159,7 @@ class CloseApproach:
         """Return `repr(self)`, a computer-readable string representation of this object."""
         return (f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, "
                 f"velocity={self.velocity:.2f}, neo={self.neo!r})")
+
 """
 # Test cases for NearEarthObject
 # Creating an instance of an object NearEarthObject

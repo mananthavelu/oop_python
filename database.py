@@ -12,6 +12,10 @@ data on NEOs and close approaches extracted by `extract.load_neos` and
 You'll edit this file in Tasks 2 and 3.
 """
 
+from extract import load_neos, load_approaches
+
+neos = load_neos('data/neos.neos.csv')
+approaches = load_approaches('data/cad.json')
 
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
@@ -43,7 +47,20 @@ class NEODatabase:
         self._approaches = approaches
 
         # TODO: What additional auxiliary data structures will be useful?
-
+        # Map NEO designations
+        self._designation_neo_dict = {}
+        # Map NEO names
+        self._name_neo_dict = {}
+        for neo in self._neos:
+            self._designation_neo_dict[neo.designation] = neo
+            # Not every NEO got a name.
+            if neo.name:
+                self._name_neo_dict[neo.name] = neo
+        for approach in self._approaches:
+            neo = self._designation_neo_dict[approach._designation]
+            approach.neo = neo
+            neo.approaches.append(approach)
+            
         # TODO: Link together the NEOs and their close approaches.
 
     def get_neo_by_designation(self, designation):
