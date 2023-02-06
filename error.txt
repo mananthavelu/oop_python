@@ -1,0 +1,281 @@
+C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python>python3 -m unittest --verbose tests.test_extract tests.test_database
+test_approach_distance_is_float (tests.test_extract.TestLoadApproaches) ... FAIL
+test_approach_time_is_datetime (tests.test_extract.TestLoadApproaches) ... ok
+test_approach_velocity_is_float (tests.test_extract.TestLoadApproaches) ... FAIL
+test_approaches_are_collection (tests.test_extract.TestLoadApproaches) ... ok
+test_approaches_contain_all_elements (tests.test_extract.TestLoadApproaches) ... ok
+test_approaches_contain_close_approaches (tests.test_extract.TestLoadApproaches) ... ok
+test_adonis_is_potentially_hazardous (tests.test_extract.TestLoadNEOs) ... FAIL
+test_asclepius_has_name_no_diameter (tests.test_extract.TestLoadNEOs) ... ERROR
+test_neos_are_collection (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_contain_2019_SC8_no_name_no_diameter (tests.test_extract.TestLoadNEOs) ... FAIL
+test_neos_contain_all_elements (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_contain_near_earth_objects (tests.test_extract.TestLoadNEOs) ... ok
+test_database_construction_ensures_each_neo_has_an_approaches_attribute (tests.test_database.TestDatabase) ... ok
+test_database_construction_ensures_neos_collectively_exhaust_approaches (tests.test_database.TestDatabase) ... ok
+test_database_construction_ensures_neos_mutually_exclude_approaches (tests.test_database.TestDatabase) ... ok
+test_database_construction_links_approaches_to_neos (tests.test_database.TestDatabase) ... ok
+test_get_neo_by_designation (tests.test_database.TestDatabase) ... FAIL
+test_get_neo_by_designation_missing (tests.test_database.TestDatabase) ... ERROR
+test_get_neo_by_designation_neos_with_year (tests.test_database.TestDatabase) ... FAIL
+test_get_neo_by_name (tests.test_database.TestDatabase) ... ERROR
+test_get_neo_by_name_missing (tests.test_database.TestDatabase) ... ERROR
+
+======================================================================
+ERROR: test_asclepius_has_name_no_diameter (tests.test_extract.TestLoadNEOs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 68, in test_asclepius_has_name_no_diameter
+    self.assertTrue(math.isnan(neo.diameter))
+TypeError: must be real number, not str
+
+======================================================================
+ERROR: test_get_neo_by_designation_missing (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 95, in test_get_neo_by_designation_missing
+    nonexistent = self.db.get_neo_by_designation('not-real-designation')
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\database.py", line 84, in get_neo_by_designation
+    return self._designation_neo_dict[designation]
+KeyError: 'not-real-designation'
+
+======================================================================
+ERROR: test_get_neo_by_name (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 103, in test_get_neo_by_name
+    self.assertTrue(math.isnan(lemmon.diameter))
+TypeError: must be real number, not str
+
+======================================================================
+ERROR: test_get_neo_by_name_missing (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 114, in test_get_neo_by_name_missing
+    nonexistent = self.db.get_neo_by_name('not-real-name')
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\database.py", line 101, in get_neo_by_name
+    return self._name_neo_dict[name]
+KeyError: 'not-real-name'
+
+======================================================================
+FAIL: test_approach_distance_is_float (tests.test_extract.TestLoadApproaches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 113, in test_approach_distance_is_float
+    self.assertIsInstance(approach.distance, float)
+AssertionError: '0.0211660525256395' is not an instance of <class 'float'>
+
+======================================================================
+FAIL: test_approach_velocity_is_float (tests.test_extract.TestLoadApproaches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 118, in test_approach_velocity_is_float
+    self.assertIsInstance(approach.velocity, float)
+AssertionError: '5.62203195551878' is not an instance of <class 'float'>
+
+======================================================================
+FAIL: test_adonis_is_potentially_hazardous (tests.test_extract.TestLoadNEOs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 77, in test_adonis_is_potentially_hazardous
+    self.assertEqual(cerberus.diameter, 1.2)
+AssertionError: '1.2' != 1.2
+
+======================================================================
+FAIL: test_get_neo_by_designation_neos_with_year (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 83, in test_get_neo_by_designation_neos_with_year
+    self.assertEqual(bs_2020.name, None)
+AssertionError: '' != None
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.265s
+
+FAILED (failures=6, errors=4)
+
+C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python>python3 -m unittest --verbose tests.test_extract tests.test_database
+test_approach_distance_is_float (tests.test_extract.TestLoadApproaches) ... FAIL
+test_approach_time_is_datetime (tests.test_extract.TestLoadApproaches) ... ok
+test_approach_velocity_is_float (tests.test_extract.TestLoadApproaches) ... FAIL
+test_approaches_are_collection (tests.test_extract.TestLoadApproaches) ... ok
+test_approaches_contain_all_elements (tests.test_extract.TestLoadApproaches) ... ok
+test_approaches_contain_close_approaches (tests.test_extract.TestLoadApproaches) ... ok
+test_adonis_is_potentially_hazardous (tests.test_extract.TestLoadNEOs) ... FAIL
+test_asclepius_has_name_no_diameter (tests.test_extract.TestLoadNEOs) ... ERROR
+test_neos_are_collection (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_contain_2019_SC8_no_name_no_diameter (tests.test_extract.TestLoadNEOs) ... FAIL
+test_neos_contain_all_elements (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_contain_near_earth_objects (tests.test_extract.TestLoadNEOs) ... ok
+test_database_construction_ensures_each_neo_has_an_approaches_attribute (tests.test_database.TestDatabase) ... ok
+test_database_construction_ensures_neos_collectively_exhaust_approaches (tests.test_database.TestDatabase) ... ok
+test_database_construction_ensures_neos_mutually_exclude_approaches (tests.test_database.TestDatabase) ... ok
+test_database_construction_links_approaches_to_neos (tests.test_database.TestDatabase) ... ok
+test_get_neo_by_designation (tests.test_database.TestDatabase) ... FAIL
+test_get_neo_by_designation_missing (tests.test_database.TestDatabase) ... ERROR
+test_get_neo_by_designation_neos_with_year (tests.test_database.TestDatabase) ... FAIL
+test_get_neo_by_name (tests.test_database.TestDatabase) ... ERROR
+test_get_neo_by_name_missing (tests.test_database.TestDatabase) ... ERROR
+
+======================================================================
+ERROR: test_asclepius_has_name_no_diameter (tests.test_extract.TestLoadNEOs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 68, in test_asclepius_has_name_no_diameter
+    self.assertTrue(math.isnan(neo.diameter))
+TypeError: must be real number, not str
+
+======================================================================
+ERROR: test_get_neo_by_designation_missing (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 95, in test_get_neo_by_designation_missing
+    nonexistent = self.db.get_neo_by_designation('not-real-designation')
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\database.py", line 84, in get_neo_by_designation
+    return self._designation_neo_dict[designation]
+KeyError: 'not-real-designation'
+
+======================================================================
+ERROR: test_get_neo_by_name (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 103, in test_get_neo_by_name
+    self.assertTrue(math.isnan(lemmon.diameter))
+TypeError: must be real number, not str
+
+======================================================================
+ERROR: test_get_neo_by_name_missing (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 114, in test_get_neo_by_name_missing
+    nonexistent = self.db.get_neo_by_name('not-real-name')
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\database.py", line 101, in get_neo_by_name
+    return self._name_neo_dict[name]
+KeyError: 'not-real-name'
+
+======================================================================
+FAIL: test_approach_distance_is_float (tests.test_extract.TestLoadApproaches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 113, in test_approach_distance_is_float
+    self.assertIsInstance(approach.distance, float)
+AssertionError: '0.0211660525256395' is not an instance of <class 'float'>
+
+======================================================================
+FAIL: test_approach_velocity_is_float (tests.test_extract.TestLoadApproaches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 118, in test_approach_velocity_is_float
+    self.assertIsInstance(approach.velocity, float)
+AssertionError: '5.62203195551878' is not an instance of <class 'float'>
+
+======================================================================
+FAIL: test_adonis_is_potentially_hazardous (tests.test_extract.TestLoadNEOs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 77, in test_adonis_is_potentially_hazardous
+    self.assertEqual(neo.diameter, 0.6)
+AssertionError: '0.6' != 0.6
+
+======================================================================
+FAIL: test_neos_contain_2019_SC8_no_name_no_diameter (tests.test_extract.TestLoadNEOs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 58, in test_neos_contain_2019_SC8_no_name_no_diameter
+    self.assertEqual(neo.name, None)
+AssertionError: '' != None
+
+======================================================================
+FAIL: test_get_neo_by_designation (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 62, in test_get_neo_by_designation
+    self.assertEqual(cerberus.diameter, 1.2)
+AssertionError: '1.2' != 1.2
+
+======================================================================
+FAIL: test_get_neo_by_designation_neos_with_year (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 83, in test_get_neo_by_designation_neos_with_year
+    self.assertEqual(bs_2020.name, None)
+AssertionError: '' != None
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.207s
+
+FAILED (failures=6, errors=4)
+
+C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python>python3 -m unittest --verbose tests.test_extract tests.test_database
+test_approach_distance_is_float (tests.test_extract.TestLoadApproaches) ... FAIL
+test_approach_time_is_datetime (tests.test_extract.TestLoadApproaches) ... ok
+test_approach_velocity_is_float (tests.test_extract.TestLoadApproaches) ... FAIL
+test_approaches_are_collection (tests.test_extract.TestLoadApproaches) ... ok
+test_approaches_contain_all_elements (tests.test_extract.TestLoadApproaches) ... ok
+test_approaches_contain_close_approaches (tests.test_extract.TestLoadApproaches) ... ok
+test_adonis_is_potentially_hazardous (tests.test_extract.TestLoadNEOs) ... FAIL
+test_asclepius_has_name_no_diameter (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_are_collection (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_contain_2019_SC8_no_name_no_diameter (tests.test_extract.TestLoadNEOs) ... FAIL
+test_neos_contain_all_elements (tests.test_extract.TestLoadNEOs) ... ok
+test_neos_contain_near_earth_objects (tests.test_extract.TestLoadNEOs) ... ok
+test_database_construction_ensures_each_neo_has_an_approaches_attribute (tests.test_database.TestDatabase) ... ok
+test_database_construction_ensures_neos_collectively_exhaust_approaches (tests.test_database.TestDatabase) ... ok
+test_database_construction_ensures_neos_mutually_exclude_approaches (tests.test_database.TestDatabase) ... ok
+test_database_construction_links_approaches_to_neos (tests.test_database.TestDatabase) ... ok
+test_get_neo_by_designation (tests.test_database.TestDatabase) ... FAIL
+test_get_neo_by_designation_missing (tests.test_database.TestDatabase) ... ERROR
+test_get_neo_by_designation_neos_with_year (tests.test_database.TestDatabase) ... FAIL
+test_get_neo_by_name (tests.test_database.TestDatabase) ... ok
+test_get_neo_by_name_missing (tests.test_database.TestDatabase) ... ERROR
+
+======================================================================
+ERROR: test_get_neo_by_designation_missing (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 95, in test_get_neo_by_designation_missing
+    nonexistent = self.db.get_neo_by_designation('not-real-designation')
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\database.py", line 84, in get_neo_by_designation
+    return self._designation_neo_dict[designation]
+KeyError: 'not-real-designation'
+
+======================================================================
+ERROR: test_get_neo_by_name_missing (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 114, in test_get_neo_by_name_missing
+    nonexistent = self.db.get_neo_by_name('not-real-name')
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\database.py", line 101, in get_neo_by_name
+    return self._name_neo_dict[name]
+KeyError: 'not-real-name'
+
+======================================================================
+FAIL: test_approach_distance_is_float (tests.test_extract.TestLoadApproaches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_extract.py", line 113, in test_approach_distance_is_float
+    self.assertIsInstance(approach.distance, float)
+AssertionError: '0.0211660525256395' is not an instance of <class 'float'>
+
+======================================================================
+FAIL: test_approach_velocity_is_float (tests.test_extract.TestLoadApproaches)
+======================================================================
+FAIL: test_get_neo_by_designation (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 62, in test_get_neo_by_designation
+    self.assertEqual(cerberus.diameter, 1.2)
+AssertionError: '1.2' != 1.2
+
+======================================================================
+FAIL: test_get_neo_by_designation_neos_with_year (tests.test_database.TestDatabase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\32470\Desktop\coding_practice\int_python_p1\p1\oop_python\tests\test_database.py", line 83, in test_get_neo_by_designation_neos_with_year
+    self.assertEqual(bs_2020.name, None)
+AssertionError: '' != None
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.230s
+
+FAILED (failures=6, errors=2)

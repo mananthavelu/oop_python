@@ -14,8 +14,8 @@ You'll edit this file in Tasks 2 and 3.
 
 from extract import load_neos, load_approaches
 
-neos = load_neos('data/neos.neos.csv')
-approaches = load_approaches('data/cad.json')
+#neos = load_neos('data/neos.csv')
+#approaches = load_approaches('data/cad.json')
 
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
@@ -81,7 +81,9 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-        return None
+        if designation not in self._designation_neo_dict:
+            return None
+        return self._designation_neo_dict[designation]
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -98,7 +100,9 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
         # TODO: Fetch an NEO by its name.
-        return None
+        if name not in self._name_neo_dict:
+            return None
+        return self._name_neo_dict[name]
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
