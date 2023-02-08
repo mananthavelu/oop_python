@@ -109,7 +109,40 @@ def create_filters(
     :return: A collection of filters for use with `query`.
     """
     # TODO: Decide how you will represent your filters.
-    return ()
+
+    list_of_filters = []
+
+    if date is not None:
+        list_of_filters.append(DateFilter(operator.eq, date))
+    
+    if start_date:
+        list_of_filters.append(DateFilter(operator.ge, start_date))
+
+    if end_date:
+        list_of_filters.append(DateFilter(operator.le, end_date))
+    
+    if distance_min:
+        list_of_filters.append(DistanceFilter(operator.ge, distance_min))
+
+    if distance_max:
+        list_of_filters.append(DistanceFilter(operator.le, distance_max))
+
+    if velocity_min:
+        list_of_filters.append(VelocityFilter(operator.ge, velocity_min))
+
+    if velocity_max:
+        list_of_filters.append(VelocityFilter(operator.le, velocity_max))
+
+    if diameter_min:
+        list_of_filters.append(DiameterFilter(operator.ge, diameter_min))
+    
+    if diameter_max:
+        list_of_filters.append(DiameterFilter(operator.le, diameter_max))
+
+    if hazardous is not None:
+        list_of_filters.append(HazardousFilter(operator.eq, hazardous))
+
+    return list_of_filters
 
 
 def limit(iterator, n=None):
@@ -122,4 +155,86 @@ def limit(iterator, n=None):
     :yield: The first (at most) `n` values from the iterator.
     """
     # TODO: Produce at most `n` values from the given iterator.
-    return iterator
+
+    if n == 0 or n is None:
+        return iterator
+    else:
+        return [value for counter, value in enumerate(iterator) if counter < n]
+
+
+
+class DateFilter(AttributeFilter):
+    """
+    Args:
+        AttributeFilter (class): Inheriting the class
+
+    Returns:
+        time: returns the date
+    """
+    @classmethod
+    def get(cls, approach):
+        return approach.time.date()
+
+
+class DistanceFilter(AttributeFilter):
+    """
+    Args:
+        AttributeFilter (class): Inheriting the class
+
+    Returns:
+        distance: returns the distance
+    """
+    @classmethod
+    def get(cls, approach):
+        return approach.distance
+
+
+class VelocityFilter(AttributeFilter):
+    """
+    Args:
+        AttributeFilter (class): Inheriting the class
+
+    Returns:
+        distance: returns the velocity
+    """
+    @classmethod
+    def get(cls, approach):
+        return approach.velocity
+
+
+class DiameterFilter(AttributeFilter):
+    """
+    Args:
+        AttributeFilter (class): Inheriting the class
+
+    Returns:
+        distance: returns the diameter
+    """
+    @classmethod
+    def get(cls, approach):
+        return approach.neo.diameter
+
+class HazardousFilter(AttributeFilter):
+    """
+    Args:
+        AttributeFilter (class): Inheriting the class
+
+    Returns:
+        distance: returns the Hazardous nature
+    """
+    @classmethod
+    def get(cls, approach):
+        return approach.neo.hazardous
+
+
+"""
+class DesignationFilter(AttributeFilter):
+    @classmethod
+    def get(cls, approach):
+        return approach.neo.designation
+
+from models import CloseApproach
+approach_433 = CloseApproach("433",  "1900-Jan-01 00:11", 0.0921795123769547, 16.7523040362574, None)
+f = DesignationFilter(operator.eq, "433")
+f(approach_433)  # => True
+"""
