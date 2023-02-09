@@ -34,9 +34,6 @@ h - absolute magnitude H (mag)
 
 """ 
 
-
-
-
 class NearEarthObject:
     """A near-Earth object (NEO).
 
@@ -61,6 +58,8 @@ class NearEarthObject:
         # You should coerce these values to their appropriate data type and
         # handle any edge cases, such as a empty name being represented by `None`
         # and a missing diameter being represented by `float('nan')`.
+
+        # Assigned the parameters to the instance attributes
         self.designation = designation
         self.name = name
         self.diameter = diameter
@@ -73,7 +72,7 @@ class NearEarthObject:
     def fullname(self):
         """Return a representation of the full name of this NEO."""
         # TODO: Use self.designation and self.name to build a fullname for this object.
-                
+        
         if self.name is not None:
             name_text = str(self.designation) + ' ' + self.name
         else:
@@ -122,6 +121,8 @@ class CloseApproach:
         # onto attributes named `_designation`, `time`, `distance`, and `velocity`.
         # You should coerce these values to their appropriate data type and handle any edge cases.
         # The `cd_to_datetime` function will be useful.
+
+        # Pass the parameters to the instance attributes
         self._designation = designation
         self.time = cd_to_datetime(time)
         self.distance = distance

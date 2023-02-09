@@ -12,7 +12,7 @@ You'll edit this file in Part 4.
 """
 import csv
 import json
-
+from helpers import cd_to_datetime, datetime_to_str
 
 def write_to_csv(results, filename):
     """Write an iterable of `CloseApproach` objects to a CSV file.
@@ -30,6 +30,19 @@ def write_to_csv(results, filename):
     )
     # TODO: Write the results to a CSV file, following the specification in the instructions.
     
+    # Create a file like object
+    with open(filename,'w') as outfile:
+        writer = csv.DictWriter(outfile,fieldnames=fieldnames)
+        writer.writeheader()
+        # Iterate over each record and write it to the file like object
+        for record in results:
+            writer.writerow({'datetime_utc':datetime_to_str(record.time),
+                'distance_au':record.distance,
+                'velocity_km_s':record.velocity,
+                'designation':record._designation,
+                'name':record.neo.name,
+                'diameter_km':record.neo.diameter,
+                'potentially_hazardous':str(record.neo.hazardous)})
 
 
 def write_to_json(results, filename):
@@ -44,3 +57,21 @@ def write_to_json(results, filename):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     # TODO: Write the results to a JSON file, following the specification in the instructions.
+    ca_container = []
+    for record in results:
+        ca_dict = {"datetime_utc": datetime_to_str(record.time),
+                   "distance_au": record.distance,
+                   "velocity_km_s": record.velocity,
+                   "neo": {
+                       "designation": record.neo.designation,
+                       "name": record.neo.name if record.neo.name else '',
+                       "diameter_km": record.neo.diameter,
+                       "potentially_hazardous": record.neo.hazardous
+                   }
+                  }
+        # Append each record to the container
+        ca_container.append(ca_dict)
+
+    with open(filename, 'w') as outfile:
+        json.dump(ca_container, outfile, indent=4)
+

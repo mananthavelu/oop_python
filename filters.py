@@ -54,6 +54,7 @@ class AttributeFilter:
 
     def __call__(self, approach):
         """Invoke `self(approach)`."""
+        #print(type(self.value))
         return self.op(self.get(approach), self.value)
 
     @classmethod
