@@ -29,7 +29,6 @@ def write_to_csv(results, filename):
         'designation', 'name', 'diameter_km', 'potentially_hazardous'
     )
     # TODO: Write the results to a CSV file, following the specification in the instructions.
-    
     # Create a file like object
     with open(filename,'w') as outfile:
         writer = csv.DictWriter(outfile,fieldnames=fieldnames)
@@ -74,4 +73,4 @@ def write_to_json(results, filename):
 
     with open(filename, 'w') as outfile:
         json.dump(ca_container, outfile, indent=4)
-
+        

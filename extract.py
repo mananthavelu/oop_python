@@ -49,5 +49,6 @@ def load_approaches(cad_json_path):
             approach = dict(zip(reader['fields'], row))
             distance = float(approach['dist']) if approach['dist'] is not None else float('nan')
             velocity = float(approach['v_rel']) if approach['v_rel'] is not None else float('nan')
-            list_of_cas.append(CloseApproach(approach['des'], approach['cd'], distance, velocity,  None))
+            list_of_cas.append(CloseApproach(approach['des'], approach['cd'],
+                               distance, velocity,  None))
     return list_of_cas

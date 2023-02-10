@@ -46,7 +46,6 @@ class NEODatabase:
         self._designation_neo_dict = {}
         # Similarly for name
         self._name_neo_dict = {}
-       
         for neo in self._neos:
             self._designation_neo_dict[neo.designation] = neo
             if neo.name:
@@ -123,5 +122,4 @@ class NEODatabase:
         else:
             for approach in self._approaches:
                 yield approach
-
-
+                

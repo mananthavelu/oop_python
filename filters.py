@@ -38,7 +38,7 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
-    def __init__(self, op, value):
+    def __init__(self, op_to_apply, value):
         """Construct a new `AttributeFilter` from an binary predicate and a reference value.
 
         The reference value will be supplied as the second (right-hand side)
@@ -49,13 +49,13 @@ class AttributeFilter:
         :param op: A 2-argument predicate comparator (such as `operator.le`).
         :param value: The reference value to compare against.
         """
-        self.op = op
+        self.op_to_apply = op_to_apply
         self.value = value
 
     def __call__(self, approach):
         """Invoke `self(approach)`."""
         #print(type(self.value))
-        return self.op(self.get(approach), self.value)
+        return self.op_to_apply(self.get(approach), self.value)
 
     @classmethod
     def get(cls, approach):
@@ -70,7 +70,8 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
+        return (f"{self.__class__.__name__}(op_to_apply=operator.{self.op_to_apply.__name__}, "
+        "value={self.value})")
 
 
 def create_filters(
@@ -115,38 +116,27 @@ def create_filters(
 
     if date is not None:
         list_of_filters.append(DateFilter(operator.eq, date))
-    
     if start_date:
         list_of_filters.append(DateFilter(operator.ge, start_date))
-
     if end_date:
         list_of_filters.append(DateFilter(operator.le, end_date))
-    
     if distance_min:
         list_of_filters.append(DistanceFilter(operator.ge, distance_min))
-
     if distance_max:
         list_of_filters.append(DistanceFilter(operator.le, distance_max))
-
     if velocity_min:
         list_of_filters.append(VelocityFilter(operator.ge, velocity_min))
-
     if velocity_max:
         list_of_filters.append(VelocityFilter(operator.le, velocity_max))
-
     if diameter_min:
         list_of_filters.append(DiameterFilter(operator.ge, diameter_min))
-
     if diameter_max:
         list_of_filters.append(DiameterFilter(operator.le, diameter_max))
-
     if hazardous is not None:
         list_of_filters.append(HazardousFilter(operator.eq, hazardous))
-
     return list_of_filters
 
-
-def limit(iterator, n=None):
+def limit(iterator, number_limit=None):
     """Produce a limited stream of values from an iterator.
 
     If `n` is 0 or None, don't limit the iterator at all.
@@ -157,10 +147,10 @@ def limit(iterator, n=None):
     """
     # TODO: Produce at most `n` values from the given iterator.
 
-    if n == 0 or n is None:
+    if number_limit == 0 or number_limit is None:
         return iterator
     else:
-        yield [value for counter, value in enumerate(iterator) if counter < n]
+        yield [value for counter, value in enumerate(iterator) if counter < number_limit]
 
 
 class DateFilter(AttributeFilter):
