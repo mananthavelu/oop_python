@@ -12,11 +12,6 @@ data on NEOs and close approaches extracted by `extract.load_neos` and
 You'll edit this file in Tasks 2 and 3.
 """
 
-from extract import load_neos, load_approaches
-
-#neos = load_neos('data/neos.csv')
-#approaches = load_approaches('data/cad.json')
-
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
 
@@ -51,7 +46,7 @@ class NEODatabase:
         self._designation_neo_dict = {}
         # Similarly for name
         self._name_neo_dict = {}
-        
+       
         for neo in self._neos:
             self._designation_neo_dict[neo.designation] = neo
             if neo.name:

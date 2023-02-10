@@ -12,7 +12,7 @@ You'll edit this file in Part 4.
 """
 import csv
 import json
-from helpers import cd_to_datetime, datetime_to_str
+from helpers import datetime_to_str
 
 def write_to_csv(results, filename):
     """Write an iterable of `CloseApproach` objects to a CSV file.

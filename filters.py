@@ -136,7 +136,7 @@ def create_filters(
 
     if diameter_min:
         list_of_filters.append(DiameterFilter(operator.ge, diameter_min))
-    
+
     if diameter_max:
         list_of_filters.append(DiameterFilter(operator.le, diameter_max))
 
@@ -160,8 +160,7 @@ def limit(iterator, n=None):
     if n == 0 or n is None:
         return iterator
     else:
-        return [value for counter, value in enumerate(iterator) if counter < n]
-
+        yield [value for counter, value in enumerate(iterator) if counter < n]
 
 
 class DateFilter(AttributeFilter):
@@ -226,16 +225,3 @@ class HazardousFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.neo.hazardous
-
-
-"""
-class DesignationFilter(AttributeFilter):
-    @classmethod
-    def get(cls, approach):
-        return approach.neo.designation
-
-from models import CloseApproach
-approach_433 = CloseApproach("433",  "1900-Jan-01 00:11", 0.0921795123769547, 16.7523040362574, None)
-f = DesignationFilter(operator.eq, "433")
-f(approach_433)  # => True
-"""

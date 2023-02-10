@@ -18,21 +18,7 @@ quirks of the data set, such as missing names and unknown diameters.
 You'll edit this file in Task 1.
 """
 
-"""
-Reference:
-des - primary designation of the asteroid or comet (e.g., 443, 2000 SG344)
-orbit_id - orbit ID
-jd - time of close-approach (JD Ephemeris Time)
-cd - time of close-approach (formatted calendar date/time, in UTC)
-dist - nominal approach distance (au)
-dist_min - minimum (3-sigma) approach distance (au)
-dist_max - maximum (3-sigma) approach distance (au)
-v_rel - velocity relative to the approach body at close approach (km/s)
-v_inf - velocity relative to a massless body (km/s)
-t_sigma_f - 3-sigma uncertainty in the time of close-approach (formatted in days, hours, and minutes; days are not included if zero; example "13:02" is 13 hours 2 minutes; example "2_09:08" is 2 days 9 hours 8 minutes)
-h - absolute magnitude H (mag)
-
-""" 
+from helpers import cd_to_datetime, datetime_to_str
 
 class NearEarthObject:
     """A near-Earth object (NEO).
@@ -95,8 +81,6 @@ class NearEarthObject:
         return (f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, "
                 f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})")
 
-from helpers import cd_to_datetime, datetime_to_str
-
 class CloseApproach:
     """A close approach to Earth by an NEO.
 
@@ -112,7 +96,11 @@ class CloseApproach:
     """
     # TODO: How can you, and should you, change the arguments to this constructor?
     # If you make changes, be sure to update the comments in this file.
-    def __init__(self, designation, time, distance = float('nan'), velocity = float('nan'), neo = None):
+    def __init__(self, 
+                 designation, 
+                 time, distance = float('nan'), 
+                 velocity = float('nan'), 
+                 neo = None):
         """Create a new `CloseApproach`.
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
@@ -127,7 +115,6 @@ class CloseApproach:
         self.time = cd_to_datetime(time)
         self.distance = distance
         self.velocity = velocity
-
         # Create an attribute for the referenced NEO, originally None.
         self.neo = neo
 
@@ -158,26 +145,6 @@ class CloseApproach:
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
+
         return (f"CloseApproach(time={self.time_str!r}, distance={self.distance:.2f}, "
                 f"velocity={self.velocity:.2f}, neo={self.neo!r})")
-
-"""
-# Test cases for NearEarthObject
-# Creating an instance of an object NearEarthObject
-neo = NearEarthObject("433", "Eros", 4.0, 'N',[])
-
-# Printing the Instance attributes
-# Printing the list of instance attributes and its values in a dictionary
-print(vars(neo))
-
-#print(neo) calls the object.__repr__ neo.__repr__
-print(neo)# calls object.__str__
-print(repr(neo))# calls official representation of an object
-neo# calls official representation of an object in interpreter
-print(str(neo))
-
-
-# Test cases for CloseApproach
-ca = CloseApproach("433",  "1900-Jan-01 00:11", 0.0921795123769547, 16.7523040362574, None)
-print(ca)
-"""
