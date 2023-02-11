@@ -23,7 +23,7 @@ iterator.
 You'll edit this file in Tasks 3a and 3c.
 """
 import operator
-
+import itertools
 
 class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
@@ -180,8 +180,7 @@ def limit(iterator, number_limit=None):
     if number_limit == 0 or number_limit is None:
         return iterator
     else:
-        yield [value for counter, value in enumerate(iterator)
-               if counter < number_limit]
+        return itertools.islice(iterator, number_limit)
 
 
 class DateFilter(AttributeFilter):
