@@ -1,4 +1,8 @@
-"""Provide filters for querying close approaches and limit the
+"""
+
+Provide filters.
+
+For querying close approaches and limit the
 generated results.
 
 The `create_filters` function produces a collection of objects that
@@ -25,8 +29,11 @@ class UnsupportedCriterionError(NotImplementedError):
     """A filter criterion is unsupported."""
 
 
+
 class AttributeFilter:
-    """A general superclass for filters on comparable attributes.
+    """
+    
+    A general superclass for filters on comparable attributes.
 
     An `AttributeFilter` represents the search criteria pattern comparing some
     attribute of a close approach (or its attached NEO) to a reference value.
@@ -40,10 +47,13 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
-    def __init__(self, op_to_apply, value):
-        """Construct a new `AttributeFilter` from an binary predicate and a
-        reference value.
 
+    def __init__(self, op_to_apply, value):
+        """
+        
+        Construct a new `AttributeFilter`.
+        
+        from an binary predicate and a reference value.
         The reference value will be supplied as the second (right-hand side)
         argument to the operator function. For example, an `AttributeFilter`
         with `op=operator.le` and `value=10` will, when called on an approach,
@@ -61,7 +71,9 @@ class AttributeFilter:
 
     @classmethod
     def get(cls, approach):
-        """Get an attribute of interest from a close approach.
+        """
+        
+        Get an attribute of interest from a close approach.
 
         Concrete subclasses must override this method to get an attribute of
         interest from the supplied `CloseApproach`.
@@ -73,6 +85,7 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return the message when printing the object."""
         return (f"{self.__class__.__name__}"
                 f"(op_to_apply=operator.{self.op_to_apply.__name__}, "
                 f"value={self.value})")
@@ -85,7 +98,9 @@ def create_filters(
         diameter_min=None, diameter_max=None,
         hazardous=None
 ):
-    """Create a collection of filters from user-specified criteria.
+    """
+    
+    Create a collection of filters from user-specified criteria.
 
     Each of these arguments is provided by the main module with a value
     from the user's options at the command line. Each one corresponds
@@ -126,8 +141,6 @@ def create_filters(
      is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-    # TODO: Decide how you will represent your filters.
-
     list_of_filters = []
 
     if date is not None:
@@ -154,7 +167,9 @@ def create_filters(
 
 
 def limit(iterator, number_limit=None):
-    """Produce a limited stream of values from an iterator.
+    """
+    
+    Produce a limited stream of values from an iterator.
 
     If `n` is 0 or None, don't limit the iterator at all.
 
@@ -162,8 +177,6 @@ def limit(iterator, number_limit=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    # TODO: Produce at most `n` values from the given iterator.
-
     if number_limit == 0 or number_limit is None:
         return iterator
     else:
@@ -173,64 +186,121 @@ def limit(iterator, number_limit=None):
 
 class DateFilter(AttributeFilter):
     """
+    Return the date.
+    
     Args:
         AttributeFilter (class): Inheriting the class
 
     Returns:
         time: returns the date
     """
+
     @classmethod
     def get(cls, approach):
+        """Return the date.
+
+        Args:
+            approach (_type_): approach
+
+        Returns:
+            date_time: date time
+        """
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
     """
+    
+    Return the distance.
+
     Args:
         AttributeFilter (class): Inheriting the class
 
     Returns:
         distance: returns the distance
     """
+
     @classmethod
     def get(cls, approach):
+        """Return the distance.
+
+        Args:
+            approach (_type_): approach
+
+        Returns:
+            distance: distance
+        """
         return approach.distance
 
 
 class VelocityFilter(AttributeFilter):
     """
+    Return the Velocity.
+
     Args:
         AttributeFilter (class): Inheriting the class
 
     Returns:
         distance: returns the velocity
     """
+
     @classmethod
     def get(cls, approach):
+        """Return the Velocity.
+
+        Args:
+            approach (_type_): approach
+
+        Returns:
+            velocity: velocity
+        """
         return approach.velocity
 
 
 class DiameterFilter(AttributeFilter):
     """
+    Return the Diameter.
+
     Args:
         AttributeFilter (class): Inheriting the class
 
     Returns:
         distance: returns the diameter
     """
+
     @classmethod
     def get(cls, approach):
+        """Return the diameter.
+
+        Args:
+            approach (_type_): approach
+
+        Returns:
+            diameter: diameter
+        """
         return approach.neo.diameter
 
 
 class HazardousFilter(AttributeFilter):
     """
+
+    Return the Hazardous nature.
+
     Args:
         AttributeFilter (class): Inheriting the class
 
     Returns:
         distance: returns the Hazardous nature
     """
+
     @classmethod
     def get(cls, approach):
+        """Return the hazardous nature.
+
+        Args:
+            approach (_type_): approach
+
+        Returns:
+            hazardous: hazardous nature
+        """
         return approach.neo.hazardous

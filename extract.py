@@ -1,5 +1,8 @@
-"""Extract data on near-Earth objects and close approaches
-from CSV and JSON files.
+"""
+
+Extract data.
+
+on near-Earth objects and close approaches from CSV and JSON files.
 
 The `load_neos` function extracts NEO data from a CSV file,
 formatted as described in the project instructions, into a collection
@@ -21,13 +24,14 @@ from models import NearEarthObject, CloseApproach
 
 
 def load_neos(neo_csv_path):
-    """Read near-Earth object information from a CSV file.
+    """
+    
+    Read near-Earth object information from a CSV file.
 
     :param neo_csv_path: A path to a CSV file containing data about
     near-Earth objects.
     :return: A collection of `NearEarthObject`s.
     """
-    # TODO: Load NEO data from the given CSV file.
     list_of_neos = []
     with open(neo_csv_path, 'r') as neos_csv:
         reader = csv.DictReader(neos_csv)
@@ -42,13 +46,14 @@ def load_neos(neo_csv_path):
 
 
 def load_approaches(cad_json_path):
-    """Read close approach data from a JSON file.
+    """
+    
+    Read close approach data from a JSON file.
 
     :param cad_json_path: A path to a JSON file containing data about
     close approaches.
     :return: A collection of `CloseApproach`es.
     """
-    # TODO: Load close approach data from the given JSON file.
     list_of_cas = []
     with open(cad_json_path, 'r') as cad_json:
         reader = json.load(cad_json)
