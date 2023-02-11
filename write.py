@@ -14,48 +14,55 @@ import csv
 import json
 from helpers import datetime_to_str
 
+
 def write_to_csv(results, filename):
     """Write an iterable of `CloseApproach` objects to a CSV file.
 
-    The precise output specification is in `README.md`. Roughly, each output row
-    corresponds to the information in a single close approach from the `results`
-    stream and its associated near-Earth object.
+    The precise output specification is in `README.md`.
+    oughly, each output row corresponds to the information in a
+    single close approach from the `results` stream and its
+    associated near-Earth object.
 
     :param results: An iterable of `CloseApproach` objects.
-    :param filename: A Path-like object pointing to where the data should be saved.
+    :param filename: A Path-like object pointing to where
+    the data should be saved.
     """
     fieldnames = (
         'datetime_utc', 'distance_au', 'velocity_km_s',
         'designation', 'name', 'diameter_km', 'potentially_hazardous'
     )
-    # TODO: Write the results to a CSV file, following the specification in the instructions.
+    # TODO: Write the results to a CSV file, following the
+    # TODO: specification in the instructions.
     # Create a file like object
-    with open(filename,'w') as outfile:
-        writer = csv.DictWriter(outfile,fieldnames=fieldnames)
+    with open(filename, 'w') as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
         # Iterate over each record and write it to the file like object
         for record in results:
-            writer.writerow({'datetime_utc':datetime_to_str(record.time),
-                'distance_au':record.distance,
-                'velocity_km_s':record.velocity,
-                'designation':record._designation,
-                'name':record.neo.name,
-                'diameter_km':record.neo.diameter,
-                'potentially_hazardous':str(record.neo.hazardous)})
+            writer.writerow({'datetime_utc': datetime_to_str(record.time),
+                             'distance_au': record.distance,
+                             'velocity_km_s': record.velocity,
+                             'designation': record._designation,
+                             'name': record.neo.name,
+                             'diameter_km': record.neo.diameter,
+                             'potentially_hazardous':
+                             str(record.neo.hazardous)})
 
 
 def write_to_json(results, filename):
     """Write an iterable of `CloseApproach` objects to a JSON file.
 
-    The precise output specification is in `README.md`. Roughly, the output is a
-    list containing dictionaries, each mapping `CloseApproach` attributes to
-    their values and the 'neo' key mapping to a dictionary of the associated
-    NEO's attributes.
+    The precise output specification is in `README.md`. Roughly,
+    the output is a list containing dictionaries, each mapping
+    `CloseApproach` attributes to their values and the 'neo' key
+    mapping to a dictionary of the associatedNEO's attributes.
 
     :param results: An iterable of `CloseApproach` objects.
-    :param filename: A Path-like object pointing to where the data should be saved.
+    :param filename: A Path-like object pointing to where the
+    data should be saved.
     """
-    # TODO: Write the results to a JSON file, following the specification in the instructions.
+    # TODO: Write the results to a JSON file, following the
+    # TODO: specification in the instructions.
     ca_container = []
     for record in results:
         ca_dict = {"datetime_utc": datetime_to_str(record.time),
@@ -66,11 +73,10 @@ def write_to_json(results, filename):
                        "name": record.neo.name if record.neo.name else '',
                        "diameter_km": record.neo.diameter,
                        "potentially_hazardous": record.neo.hazardous
-                   }
-                  }
+                }
+            }
         # Append each record to the container
         ca_container.append(ca_dict)
 
     with open(filename, 'w') as outfile:
         json.dump(ca_container, outfile, indent=4)
-        
